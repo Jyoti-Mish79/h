@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <style>
+        .error{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <p class="error"></p>
+    <fieldset>
+        <legend>Sign Up</legend>
+        <form class="sign">
+            <label for="name">Name</label><br>
+            <input type="text" name="name" id="name" placeholder="Enter name"><br><br>
+            <label for="email">Email</label><br>
+            <input type="email" name="email" id="email" placeholder="Enter e-mail"><br><br>
+            <label for="user">Username</label><br>
+            <input type="text" name="user" id="user" placeholder="Enter username"><br><br>
+            <input type="submit">
+        </form>
+    </fieldset>
+    <script>
+        let signUp = document.querySelector(".sign");
+        let nameInput = document.getElementById('name');
+        let emailInput = document.getElementById('email');
+        let user = document.getElementById('user')
+        let error = document.querySelector('.error');
+      signUp.addEventListener('submit', validateForm);
+
+       let arr = [];
+       let id =1;
+       
+
+        function validateForm(e){
+            e.preventDefault();
+            let name = nameInput.value ;
+            let email = emailInput. value;
+            let username = user.value ;
+            if(checkName(name)<2){
+                error.innerHTML="Name should at least be 2 letter word";
+            }
+            else if(email.includes("@") == false){
+                error.innerHTML="Email should be validated with regex";
+            }
+            
+            else if(checkEmail(email) == false){
+                error.innerHTML="Email already exist";
+                error.style.color="red";
+            }
+            else {
+                error.innerHTML="Form has been successfully filled!";
+                error.style.color="green";
+                let obj={id:id++,name,email,username};
+                arr.push(obj);
+                console.log(arr);
+                nameInput.value = "";
+                emailInput.value="";
+                user.value="";
+                localStorage.setItem("data",JSON.stringify(arr));
+                window.location.href="./index.html"
+            }
+        }
+        function checkName(e){
+            let name = e.trim();
+            let arr = name.split(' ');
+            return arr.length;
+        }
+       
+        function checkEmail(email){
+            for(let t of arr){
+                if(t.email == email){
+                    return false
+                }
+            }
+           return true
+        }
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Page</title>
+    <style>
+        .error{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<h1>Registered Information</h1>
+</body>
+<script>
+      let data = JSON.parse(localStorage.getItem('data'));
+      let p = document.createElement('p');
+      let v = document.createElement('p');
+      for(t of data){
+        p.innerHTML=t.email;
+        document.body.appendChild(p);
+        v.innerHTML= t.username;
+        document.body.appendChild(v);
+      }
+      window.location.href="./index.html" 
+
+    
+</script>
+</html>
